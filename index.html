@@ -1,0 +1,71 @@
+<!doctype html>
+<!--
+  Single-file starter `index.html`
+  Deployment tips:
+  - Host on Netlify, Vercel, GitHub Pages, or S3 + CloudFront.
+  - Point your domain via A / CNAME per your host's docs.
+  - This file displays the current hostname so you can verify DNS.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Welcome — Your Site</title>
+  <meta name="description" content="Single-file static starter for your domain" />
+  <style>
+    :root{--bg:#0f172a;--card:#0b1220;--accent:#2563eb;--muted:#9ca3af;--glass:rgba(255,255,255,0.04)}
+    html,body{height:100%}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;color:#e6eef8;background:linear-gradient(180deg,#071032 0%, #071733 100%);-webkit-font-smoothing:antialiased;display:flex;align-items:center;justify-content:center;padding:24px}
+    .card{width:100%;max-width:920px;background:var(--card);border-radius:14px;padding:40px;box-shadow:0 8px 30px rgba(2,6,23,.6);border:1px solid rgba(255,255,255,0.03)}
+    .brand{display:flex;align-items:center;gap:14px}
+    .logo{font-weight:700;font-size:28px}
+    h1{margin:18px 0 6px;font-size:28px}
+    p{margin:0;color:var(--muted)}
+    .btn{display:inline-block;margin-top:18px;padding:10px 16px;background:var(--accent);color:#fff;border-radius:10px;text-decoration:none}
+    .meta{margin-top:22px;font-size:13px;color:var(--muted)}
+    pre{background:var(--glass);padding:12px;border-radius:8px;color:#cfe6ff;overflow:auto}
+    footer{margin-top:26px;color:var(--muted);font-size:13px}
+    @media (max-width:640px){.card{padding:20px}}
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="brand">
+      <div style="width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#1e3a8a,#2563eb);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700">W</div>
+      <div>
+        <div class="logo">Welcome to your site</div>
+        <div class="meta">A single-file static starter</div>
+      </div>
+    </div>
+
+    <h1 id="host">Your domain is ready</h1>
+    <p>Replace this content with your site. This file is optimized for quick static hosting deployments.</p>
+
+    <a class="btn" href="#" onclick="alert('Edit index.html — replace this with your app');return false">Customize this page</a>
+
+    <div class="meta" style="margin-top:18px">
+      <strong>Quick deployment</strong>
+      <ul>
+        <li>Push to GitHub and enable GitHub Pages, or drag & drop to Netlify/Vercel.</li>
+        <li>Point your domain: use a CNAME to your host or A records when required.</li>
+      </ul>
+    </div>
+
+    <section style="margin-top:14px">
+      <strong>Verify DNS / Hostname</strong>
+      <pre id="trace">Detecting hostname…</pre>
+    </section>
+
+    <footer>Generated on 2026-02-04 — static starter</footer>
+  </main>
+
+  <script>
+    // Show current hostname so you can verify the domain resolves to this page
+    (function(){
+      var host = location.hostname || 'localhost';
+      document.getElementById('host').textContent = host;
+      document.getElementById('trace').textContent = 'location.hostname: ' + host + '\nlocation.href: ' + location.href;
+    })();
+  </script>
+</body>
+</html>
