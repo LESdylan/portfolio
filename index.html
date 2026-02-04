@@ -1,5 +1,5 @@
-<!doctype html>
-<html lang="en" class="h-full">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,9 +8,42 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
-<body class="h-full">
-  <div id="root" class="h-full"></div>
-  <script type="module" src="/src/main.jsx"></script>
+<body>
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="brand">
+        <div class="brand-logo">D</div>
+        <div class="brand-text">
+          <h1>Dylan</h1>
+          <p>Full-Stack Developer</p>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="#projects">Projects</a>
+        <a href="https://github.com/dylan" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://linkedin.com/in/dylan" target="_blank" rel="noopener">LinkedIn</a>
+      </nav>
+    </header>
+
+    <!-- Main Grid -->
+    <main id="projects" class="main">
+      <div id="grid" class="grid">
+        <!-- Tiles injected by JS -->
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <a href="https://github.com/dylan" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://linkedin.com/in/dylan" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:dylan@example.com">Email</a>
+      <span>© 2026</span>
+    </footer>
+  </div>
+
+  <script src="js/app.js"></script>
 </body>
 </html>

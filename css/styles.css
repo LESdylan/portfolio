@@ -1,0 +1,282 @@
+/* ===== Base Reset & Variables ===== */
+:root {
+  --bg-dark: #0b1120;
+  --bg-card: #111827;
+  --accent: #3b82f6;
+  --accent-glow: rgba(59, 130, 246, 0.35);
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --border: rgba(255, 255, 255, 0.05);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--bg-dark);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ===== Layout ===== */
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* ===== Header ===== */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: rgba(11, 17, 32, 0.8);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.brand-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent), #1d4ed8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.brand-text h1 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.brand-text p {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav a {
+  font-size: 0.875rem;
+  color: var(--muted);
+  transition: color 0.2s;
+}
+
+.nav a:hover {
+  color: #fff;
+}
+
+@media (max-width: 640px) {
+  .nav { display: none; }
+}
+
+/* ===== Main Grid ===== */
+.main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  overflow: hidden;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+  width: 100%;
+  max-width: 1000px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: minmax(140px, 1fr);
+}
+
+@media (min-width: 640px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 768px) {
+  .grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ===== Tile ===== */
+.tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: linear-gradient(145deg, var(--bg-card), #0d1525);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  /* staggered entrance animation */
+  opacity: 0;
+  animation: fadeSlideIn 0.5s ease forwards;
+}
+
+.tile:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--accent);
+}
+
+.tile:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px 4px var(--accent-glow);
+  z-index: 10;
+}
+
+/* Hero tile spans 2x2 */
+.tile.hero {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+/* Glow overlay */
+.tile::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s;
+  box-shadow: inset 0 0 40px 8px var(--accent-glow);
+  pointer-events: none;
+}
+
+.tile:hover::before,
+.tile.active::before {
+  opacity: 1;
+}
+
+/* Dimmed state when another tile is hovered */
+.tile.dimmed {
+  filter: brightness(0.6);
+  transform: scale(0.97);
+}
+
+/* ===== Tile Content ===== */
+.tile-icon {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  margin-bottom: 0.75rem;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+  transition: transform 0.4s;
+}
+
+.tile:hover .tile-icon {
+  animation: wiggle 0.5s ease;
+}
+
+.tile-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.tile-details {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.35s ease, opacity 0.3s ease, margin 0.3s ease;
+  margin-top: 0;
+}
+
+.tile:hover .tile-details,
+.tile.active .tile-details {
+  max-height: 200px;
+  opacity: 1;
+  margin-top: 0.5rem;
+}
+
+.tile-desc {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+  max-width: 200px;
+}
+
+.tile-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+.tag {
+  font-size: 0.7rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 9999px;
+  background: rgba(59, 130, 246, 0.2);
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* ===== Footer ===== */
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 1rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+  background: rgba(11, 17, 32, 0.6);
+  border-top: 1px solid var(--border);
+}
+
+.footer a {
+  transition: color 0.2s;
+}
+
+.footer a:hover {
+  color: #fff;
+}
+
+/* ===== Animations ===== */
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-6deg); }
+  75% { transform: rotate(6deg); }
+}
